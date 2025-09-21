@@ -68,7 +68,7 @@ message_tele = str(date_val) + " (" + day_week + ")\n\n12am --> 7am   : " + shif
 spaces = r" " * 4
 
 st.title("🕝 Today\'s Shift")
-st.header(f"Date: {date_val} ({day_of_week})")
+st.subheader(f"Date: {date_val} ({day_of_week})")
 st.warning(f"💤 12am ➔ 7am | {shift_one}")
 st.success(f"☀️ 7am ➔ 7pm | {shift_two}")
 st.info(f"🌙 7pm ➔ 12am | {shift_three}")
