@@ -5,6 +5,7 @@ from itertools import cycle
 import pytz
 import streamlit as st
 from streamlit_autorefresh import st_autorefresh
+st.set_page_config(page_title = "Today's Shift", page_icon="./logo.png", layout = "wide")
 count = st_autorefresh(interval=5000, limit=None, key="my_autorefresh_key")
 klTz = pytz.timezone("Asia/Kuala_Lumpur")
 timeInKL = datetime.datetime.now(klTz)
