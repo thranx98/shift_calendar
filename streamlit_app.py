@@ -4,15 +4,17 @@ import calendar
 from itertools import cycle
 import pytz
 import streamlit as st
-
+from streamlit_autorefresh import st_autorefresh
+count = st_autorefresh(interval=5000, limit=None, key="my_autorefresh_key")
 klTz = pytz.timezone("Asia/Kuala_Lumpur")
 timeInKL = datetime.datetime.now(klTz)
-print(timeInKL)
+day_of_week = calendar.day_name[timeInKL.weekday()]
+print(day_of_week)
 
 year = timeInKL.year
 month = timeInKL.month
 day = timeInKL.day
-
+#day_of_week = timeInKL.dayofweek
 date_val = date(year, month, day)
 
 if date_val.year==2023:
@@ -63,9 +65,11 @@ shift_one = midnight_shift[1]
 shift_two = day_shift[1]
 shift_three = night_shift[1]
 message_tele = str(date_val) + " (" + day_week + ")\n\n12am --> 7am   : " + shift_one + "\n7am   --> 7pm   : " + shift_two + "\n7pm   --> 12am : " + shift_three + "\n"
+spaces = r" " * 4
 
-st.title('Shift Generator')
-st.warning(f"Today's Date: {date_val}")
-st.success(f"12am --> 7am: {shift_one}")
-st.success(f"7am --> 7pm: {shift_two}")
-st.success(f"7pm --> 12am: {shift_three}")
+st.title("🕝 Today\'s Shift")
+st.header(f"Date: {date_val} ({day_of_week})")
+st.warning(f"💤 12am ➔ 7am | {shift_one}")
+st.success(f"☀️ 7am ➔ 7pm | {shift_two}")
+st.info(f"🌙 7pm ➔ 12am | {shift_three}")
+st.write(f"Last refresh: {timeInKL:%Y, %d-%b %H:%M:%S}")
